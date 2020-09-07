@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CdkDragStart, CdkDragDrop } from '@angular/cdk/drag-drop';
-import { Movie, getMovies } from './movie';
+import { Item } from '../models/item';
 import { moveItemsInArray } from './moveInArray';
 
 @Component({
@@ -9,40 +9,47 @@ import { moveItemsInArray } from './moveInArray';
   styleUrls: ['./drag-and-drop.component.scss'],
 })
 export class DragAndDropComponent {
-  movies: Movie[];
-  selectedMovies: Movie[] = [];
+  items: Item[];
+  selectedItems: Item[] = [];
   isDragging = false;
 
   constructor() {
-    this.movies = getMovies();
+    this.items = [
+      { id: 0, name: 'One', checked: false },
+      { id: 1, name: 'Two', checked: false },
+      { id: 2, name: 'Three', checked: false },
+      { id: 3, name: 'Four', checked: false },
+      { id: 4, name: 'Five', checked: false },
+      { id: 5, name: 'Six', checked: false },
+      { id: 6, name: 'Seven', checked: false },
+      { id: 7, name: 'Eight', checked: false },
+    ];
   }
 
   onDragStarted(event: CdkDragStart, index: number): void {
-    console.log(event);
     this.isDragging = true;
   }
 
   drop(event: CdkDragDrop<string[]>) {
-    console.log(event);
     this.isDragging = false;
-    moveItemsInArray(this.movies, event.previousIndex, event.currentIndex, this.selectedMovies);
-    for (let i = 0; i < this.movies.length; i++) {
-      this.movies[i].id = i;
-      this.movies[i].checked = false;
+    moveItemsInArray(this.items, event.previousIndex, event.currentIndex, this.selectedItems);
+    for (let i = 0; i < this.items.length; i++) {
+      this.items[i].id = i;
+      this.items[i].checked = false;
     }
-    this.selectedMovies = [];
+    this.selectedItems = [];
   }
 
-  onTouch(event, idx: number) {
-    console.log(this.isDragging);
+  onSelectItem(event, idx: number) {
+    // console.log(this.isDragging);
 
-    this.selectedMovies = [];
-    const selectedItem: Movie = this.movies[idx];
+    this.selectedItems = [];
+    const selectedItem: Item = this.items[idx];
     selectedItem.checked = !selectedItem.checked;
 
-    for (const item of this.movies) {
+    for (const item of this.items) {
       if (item.checked) {
-        this.selectedMovies.push(item);
+        this.selectedItems.push(item);
       }
     }
   }
