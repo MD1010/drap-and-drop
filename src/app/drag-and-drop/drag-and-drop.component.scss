@@ -3,20 +3,6 @@
   width: 500px;
   max-width: 100%;
   border: solid 1px #ccc;
-  /*min-height: 60px;*/
-  height: 700px;
-  display: block;
-  background: white;
-  border-radius: 4px;
-  overflow: hidden;
-}
-
-.list-list {
-  margin-bottom: 20px;
-  width: 500px;
-  max-width: 100%;
-  border: solid 1px #ccc;
-  display: block;
   background: white;
   border-radius: 4px;
   overflow: hidden;
@@ -25,29 +11,17 @@
 .item {
   padding: 20px 10px;
   border-bottom: solid 1px #ccc;
-  color: rgba(0, 0, 0, 0.87);
+  color: #000000;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: space-between;
   box-sizing: border-box;
-  cursor: move;
   background: white;
   font-size: 14px;
 }
 
-.item-selected {
-  background-color: lime;
-  padding: 20px 10px;
-  border-bottom: solid 1px #ccc;
-  color: rgba(0, 0, 0, 0.87);
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  box-sizing: border-box;
-  cursor: move;
-  font-size: 14px;
+.item:hover {
+  cursor: pointer;
 }
 
 .cdk-drag-preview {
@@ -77,11 +51,16 @@
   line-height: 30px;
   text-align: center;
 }
-
-.example-box:last-child {
-  border: none;
-}
-
-.example-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
-  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+.tooltip {
+  display: block;
+  position: relative;
+  left: 200px;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background: blue;
+  color: white;
 }

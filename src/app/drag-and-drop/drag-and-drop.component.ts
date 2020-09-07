@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CdkDragStart, CdkDragDrop } from '@angular/cdk/drag-drop';
 import { Item } from '../models/item';
-import { moveItemsInArray } from './moveInArray';
+import { alterItemsArray } from './helpers';
 
 @Component({
   selector: 'app-drag-and-drop',
@@ -32,7 +32,7 @@ export class DragAndDropComponent {
 
   drop(event: CdkDragDrop<string[]>) {
     this.isDragging = false;
-    moveItemsInArray(this.items, event.previousIndex, event.currentIndex, this.selectedItems);
+    alterItemsArray(this.items, event.previousIndex, event.currentIndex, this.selectedItems);
     for (let i = 0; i < this.items.length; i++) {
       this.items[i].id = i;
       this.items[i].checked = false;

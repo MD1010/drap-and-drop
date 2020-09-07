@@ -2,13 +2,15 @@
   <div
     class="item"
     *ngFor="let item of items; let i = index"
-    (click)="onSelectItem($event, i)"
     cdkDrag
+    (click)="onSelectItem($event, i)"
     (cdkDragStarted)="onDragStarted($event, i)"
+    [cdkDragDisabled]="!item.checked"
   >
-    <ng-container *ngIf="!(item.checked && isDragging)">
-      <div>{{item.name}}</div>
-      <div> <mat-checkbox class="example-margin" [(ngModel)]="item.checked"></mat-checkbox></div>
-    </ng-container>
+    <div>{{item.name}}</div>
+    <mat-checkbox [(ngModel)]="item.checked"></mat-checkbox>
+    <div *cdkDragPreview class="tooltip">
+      {{selectedItems.length}}
+    </div>
   </div>
 </div>
