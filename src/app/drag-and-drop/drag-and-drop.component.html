@@ -1,0 +1,28 @@
+<div class="main">
+  <div cdkDropList class="list" (cdkDropListDropped)="drop($event)">
+    <div
+      *ngFor="let movie of movies; let i = index"
+      (click)="onTouch($event, i)"
+      cdkDrag
+      (cdkDragStarted)="onDragStarted($event, i)"
+    >
+      <div class="item-placeholder" *cdkDragPlaceholder>
+        <ng-container *ngIf="selectedMovies.length > 0 else single_placeholder">
+          <div *ngFor="let selectedMovie of selectedMovies" class="item-selected">
+            <div>{{selectedMovie.name}}</div>
+          </div>
+        </ng-container>
+
+        <ng-template #single_placeholder>
+          <div class="item">{{movie.name}}</div>
+        </ng-template>
+      </div>
+
+      <ng-container *ngIf="!(movie.checked && isDragging)">
+        <div [ngClass]="movie.checked ?  'item-selected' : 'item'">
+          {{movie.name}}
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>
