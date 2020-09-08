@@ -9,8 +9,8 @@
   >
     <div>{{item.name}}</div>
     <mat-checkbox [(ngModel)]="item.checked"></mat-checkbox>
-    <div *cdkDragPreview class="tooltip">
-      {{selectedItems.length}}
-    </div>
+  </div>
+  <div *ngIf="isDragging && selectedItems.length > 1" class="tooltip">
+    {{selectedItems.length}}
   </div>
 </div>
