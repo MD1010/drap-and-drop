@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CdkDragStart, CdkDragDrop } from '@angular/cdk/drag-drop';
+import { CdkDragStart, CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Item } from '../models/item';
 import { alterItemsArray } from './helpers';
 
@@ -30,19 +30,23 @@ export class DragAndDropComponent {
     this.isDragging = true;
   }
 
-  drop(event: CdkDragDrop<string[]>) {
+  drop(event: CdkDragDrop<string[]>): void {
     this.isDragging = false;
-    alterItemsArray(this.items, event.previousIndex, event.currentIndex, this.selectedItems);
-    for (let i = 0; i < this.items.length; i++) {
-      this.items[i].id = i;
-      this.items[i].checked = false;
-    }
-    this.selectedItems = [];
+    // let targetIndex = event.currentIndex;
+
+    moveItemInArray(this.items, event.previousIndex, event.currentIndex);
+    this.items.forEach((item) => {
+      item.checked = false;
+    });
+    // alterItemsArray(this.items, event.previousIndex, event.currentIndex, this.selectedItems);
+    // for (let i = 0; i < this.items.length; i++) {
+    //   this.items[i].id = i;
+    //   this.items[i].checked = false;
+    // }
+    // this.selectedItems = [];
   }
 
-  onSelectItem(event, idx: number) {
-    // console.log(this.isDragging);
-
+  onSelectItem(event, idx: number): void {
     this.selectedItems = [];
 
     for (const item of this.items) {

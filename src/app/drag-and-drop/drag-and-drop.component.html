@@ -13,7 +13,11 @@
       ></div>
       <div class="index"><b>{{item.id}}</b></div>
       <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
-      <div>{{item.name}}</div>
+      <div class="select-item-drag-preview" *cdkDragPreview>
+        {{item.name}}
+        <div class="drag-counter">{{this.selectedItems.length}}</div>
+      </div>
+      <div [ngClass]="{'selected': item.checked}">{{item.name}}</div>
     </div>
   </div></div
 >

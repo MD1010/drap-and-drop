@@ -1,6 +1,7 @@
 import { Item } from '../models/item';
 
 export const alterItemsArray = <T = any>(array: T[], fromIndex: number, toIndex: number, selected: Item[]) => {
+  console.log(array);
   if (selected.length > 0) {
     const selectedItems: T[] = [];
     for (const item of selected) {
