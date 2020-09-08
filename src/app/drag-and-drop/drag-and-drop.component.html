@@ -1,16 +1,19 @@
-<div cdkDropList class="list" (cdkDropListDropped)="drop($event)">
-  <div
-    class="item"
-    *ngFor="let item of items; let i = index"
-    cdkDrag
-    (click)="onSelectItem($event, i)"
-    (cdkDragStarted)="onDragStarted($event, i)"
-    [cdkDragDisabled]="!item.checked"
-  >
-    <div>{{item.name}}</div>
-    <mat-checkbox [(ngModel)]="item.checked"></mat-checkbox>
-  </div>
-  <div *ngIf="isDragging && selectedItems.length > 1" class="tooltip">
-    {{selectedItems.length}}
-  </div>
-</div>
+<div class="container">
+  <div cdkDropList class="list" (cdkDropListDropped)="drop($event)">
+    <div
+      class="row"
+      *ngFor="let item of items; let i = index"
+      cdkDrag
+      (cdkDragStarted)="onDragStarted($event, i)"
+      [cdkDragDisabled]="!item.checked"
+      cdkDragPreviewClass="select-item-drag-preview"
+    >
+      <div class="check-box"
+        ><mat-checkbox class="checkbox" [(ngModel)]="item.checked" (change)="onSelectItem($event, i)"></mat-checkbox
+      ></div>
+      <div class="index"><b>{{item.id}}</b></div>
+      <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
+      <div>{{item.name}}</div>
+    </div>
+  </div></div
+>

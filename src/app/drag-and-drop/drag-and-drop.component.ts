@@ -15,14 +15,14 @@ export class DragAndDropComponent {
 
   constructor() {
     this.items = [
-      { id: 0, name: 'One', checked: false },
-      { id: 1, name: 'Two', checked: false },
-      { id: 2, name: 'Three', checked: false },
-      { id: 3, name: 'Four', checked: false },
-      { id: 4, name: 'Five', checked: false },
-      { id: 5, name: 'Six', checked: false },
-      { id: 6, name: 'Seven', checked: false },
-      { id: 7, name: 'Eight', checked: false },
+      { id: 1, name: 'Jon Snow', checked: false },
+      { id: 2, name: 'Daenerys Targaryen', checked: false },
+      { id: 3, name: 'Eddard "Ned" Stark', checked: false },
+      { id: 4, name: 'Sansa Stark', checked: false },
+      { id: 5, name: 'Jaime Lannister', checked: false },
+      { id: 6, name: 'Annya Start', checked: false },
+      { id: 7, name: 'Robert Baratheon', checked: false },
+      { id: 8, name: 'Theon Greyjoy', checked: false },
     ];
   }
 
@@ -44,8 +44,6 @@ export class DragAndDropComponent {
     // console.log(this.isDragging);
 
     this.selectedItems = [];
-    const selectedItem: Item = this.items[idx];
-    selectedItem.checked = !selectedItem.checked;
 
     for (const item of this.items) {
       if (item.checked) {
