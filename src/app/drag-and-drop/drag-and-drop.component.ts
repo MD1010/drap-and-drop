@@ -34,19 +34,16 @@ export class DragAndDropComponent {
     this.isDragging = false;
     // let targetIndex = event.currentIndex;
 
-    moveItemInArray(this.items, event.previousIndex, event.currentIndex);
+    alterItemsArray(this.items, event.previousIndex, event.currentIndex, this.selectedItems);
+    // moveItemInArray(this.items, event.previousIndex, event.currentIndex);
     this.items.forEach((item) => {
       item.checked = false;
     });
-    // alterItemsArray(this.items, event.previousIndex, event.currentIndex, this.selectedItems);
-    // for (let i = 0; i < this.items.length; i++) {
-    //   this.items[i].id = i;
-    //   this.items[i].checked = false;
-    // }
-    // this.selectedItems = [];
+
+    this.selectedItems = [];
   }
 
-  onSelectItem(event, idx: number): void {
+  onSelectItem(event): void {
     this.selectedItems = [];
 
     for (const item of this.items) {
