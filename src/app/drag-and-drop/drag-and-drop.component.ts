@@ -1,17 +1,5 @@
-import {
-  Component,
-  OnInit,
-  ViewChild,
-  ElementRef,
-  ViewEncapsulation,
-  SimpleChanges,
-  OnChanges,
-  DoCheck,
-  IterableDiffers,
-  IterableDifferFactory,
-  IterableDiffer,
-} from '@angular/core';
-import { CdkDragStart, CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { CdkDragDrop, CdkDragStart } from '@angular/cdk/drag-drop';
+import { Component } from '@angular/core';
 import { Item } from '../models/item';
 import { alterItemsArray } from './helpers';
 
@@ -20,13 +8,11 @@ import { alterItemsArray } from './helpers';
   templateUrl: './drag-and-drop.component.html',
   styleUrls: ['./drag-and-drop.component.scss'],
 })
-export class DragAndDropComponent implements DoCheck, OnInit {
+export class DragAndDropComponent {
   items: Item[];
   selectedItems: Item[] = [];
   isDragging = false;
-  selectedDiffer: IterableDiffer<unknown>;
-  @ViewChild('ref') ref: ElementRef;
-  constructor(private differ: IterableDiffers) {
+  constructor() {
     this.items = [
       { id: 1, name: 'Jon Snow', checked: false },
       { id: 2, name: 'Daenerys Targaryen', checked: false },
@@ -38,14 +24,6 @@ export class DragAndDropComponent implements DoCheck, OnInit {
       { id: 8, name: 'Theon Greyjoy', checked: false },
     ];
   }
-  ngOnInit(): void {
-    this.selectedDiffer = this.differ.find(this.selectedItems).create();
-  }
-  ngDoCheck(): void {
-    if (this.selectedDiffer.diff(this.selectedItems)) {
-      (this.ref.nativeElement as HTMLElement).style.setProperty('--selected-items-count', this.selectedItems.length + '');
-    }
-  }
 
   onDragStarted(event: CdkDragStart, index: number): void {
     this.isDragging = true;
@@ -53,10 +31,8 @@ export class DragAndDropComponent implements DoCheck, OnInit {
 
   drop(event: CdkDragDrop<string[]>): void {
     this.isDragging = false;
-    // let targetIndex = event.currentIndex;
 
     alterItemsArray(this.items, event.previousIndex, event.currentIndex, this.selectedItems);
-    // moveItemInArray(this.items, event.previousIndex, event.currentIndex);
     this.items.forEach((item) => {
       item.checked = false;
     });

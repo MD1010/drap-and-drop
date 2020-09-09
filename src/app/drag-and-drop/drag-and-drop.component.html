@@ -14,8 +14,12 @@
       <div class="item-placeholder" *cdkDragPlaceholder></div>
       <div [ngClass]="{'selected': item.checked}">{{item.name}}</div>
 
-      <div *cdkDragPreview class="selected-preview">
-        <div *ngFor="let item of selectedItems; let i = index;" class="select-item-drag-preview-{{i}}">
+      <div *cdkDragPreview>
+        <div
+          *ngFor="let item of selectedItems; let i = index;"
+          class="select-item-drag-preview-{{i}}"
+          [ngStyle]="{'position':'relative', 'top':-60*i+'px', 'left':-15*i+'px','z-index':-i+1}"
+        >
           <span *ngIf="i === 0">{{item.name}}</span>
           <div *ngIf="selectedItems.length > 1 && i ===0 " class="drag-counter">{{this.selectedItems.length}}</div>
         </div>

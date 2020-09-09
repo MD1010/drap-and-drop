@@ -1,7 +1,3 @@
-:host {
-  --selected-items-count: 0;
-}
-
 .list {
   margin-bottom: 20px;
   width: 500px;
@@ -11,8 +7,6 @@
   overflow: hidden;
 }
 
-$selected: calc(var(--selected-items-count));
-$H-W: 150px;
 .select-item-drag-preview-0 {
   z-index: 200;
   position: relative;
@@ -20,21 +14,13 @@ $H-W: 150px;
 [class*='select-item-drag-preview-'] {
   background-color: white;
   display: inline-block;
-  width: $H-W;
-  height: 0.3 * $H-W;
+  width: 150px;
+  height: 50px;
   text-align: center;
   position: relative;
   display: grid;
   place-items: center;
   box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
-}
-@for $i from 1 through 8 {
-  .select-item-drag-preview-#{$i} {
-    position: relative;
-    top: -$H-W * 0.4 * $i;
-    left: -$H-W * 0.1 * $i;
-    z-index: -$i + 1;
-  }
 }
 
 .cdk-drag-animating {
