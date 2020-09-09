@@ -57,12 +57,10 @@
 }
 
 .item-placeholder:hover {
-  cursor: grabbing;
+  cursor: move;
 }
-.cdk-drop-list-dragging {
-  :not(.item-placeholder):hover {
-    cursor: not-allowed;
-  }
+.cdk-drop-list-dragging :hover.item-placeholder {
+  cursor: not-allowed;
 }
 
 .row {
@@ -86,5 +84,5 @@
   margin: 0 10px;
 }
 .selected {
-  cursor: move;
+  cursor: grab;
 }
