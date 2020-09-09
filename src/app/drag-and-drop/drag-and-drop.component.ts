@@ -1,4 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  ElementRef,
+  ViewEncapsulation,
+  SimpleChanges,
+  OnChanges,
+  DoCheck,
+  IterableDiffers,
+  IterableDifferFactory,
+  IterableDiffer,
+} from '@angular/core';
 import { CdkDragStart, CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Item } from '../models/item';
 import { alterItemsArray } from './helpers';
@@ -8,12 +20,13 @@ import { alterItemsArray } from './helpers';
   templateUrl: './drag-and-drop.component.html',
   styleUrls: ['./drag-and-drop.component.scss'],
 })
-export class DragAndDropComponent {
+export class DragAndDropComponent implements DoCheck, OnInit {
   items: Item[];
   selectedItems: Item[] = [];
   isDragging = false;
-
-  constructor() {
+  selectedDiffer: IterableDiffer<unknown>;
+  @ViewChild('ref') ref: ElementRef;
+  constructor(private differ: IterableDiffers) {
     this.items = [
       { id: 1, name: 'Jon Snow', checked: false },
       { id: 2, name: 'Daenerys Targaryen', checked: false },
@@ -24,6 +37,14 @@ export class DragAndDropComponent {
       { id: 7, name: 'Robert Baratheon', checked: false },
       { id: 8, name: 'Theon Greyjoy', checked: false },
     ];
+  }
+  ngOnInit(): void {
+    this.selectedDiffer = this.differ.find(this.selectedItems).create();
+  }
+  ngDoCheck(): void {
+    if (this.selectedDiffer.diff(this.selectedItems)) {
+      (this.ref.nativeElement as HTMLElement).style.setProperty('--selected-items-count', this.selectedItems.length + '');
+    }
   }
 
   onDragStarted(event: CdkDragStart, index: number): void {

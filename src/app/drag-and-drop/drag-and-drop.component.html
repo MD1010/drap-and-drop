@@ -11,15 +11,17 @@
         ><mat-checkbox class="checkbox" [(ngModel)]="item.checked" (change)="onSelectItem($event)"></mat-checkbox
       ></div>
       <div class="index"><b>{{item.id}}</b></div>
-      <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
+      <div class="item-placeholder" *cdkDragPlaceholder></div>
       <div [ngClass]="{'selected': item.checked}">{{item.name}}</div>
 
-      <div *cdkDragPreview>
-        <div *ngFor="let item of selectedItems" class="select-item-drag-preview">
-          <span>{{item.name}}</span>
+      <div *cdkDragPreview class="selected-preview">
+        <div *ngFor="let item of selectedItems; let i = index;" class="select-item-drag-preview-{{i}}">
+          <span *ngIf="i === 0">{{item.name}}</span>
+          <div *ngIf="selectedItems.length > 1 && i ===0 " class="drag-counter">{{this.selectedItems.length}}</div>
         </div>
-        <div class="drag-counter">{{this.selectedItems.length}}</div>
       </div>
     </div>
   </div></div
 >
+
+<div class="check" #ref></div>
